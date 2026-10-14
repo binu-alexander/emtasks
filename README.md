@@ -1,6 +1,6 @@
 # emTasks
 
-**A quiet to-do app for Mac that sorts your tasks by what's urgent and what's important.**
+**A quiet to-do app for Mac that sorts your tasks with the Eisenhower matrix: what's urgent, and what's important.**
 
 ![emTasks showing tasks sorted into the four quadrants, in the Daylight theme](docs/screenshots/matrix-light.png)
 
