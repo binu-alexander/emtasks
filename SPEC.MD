@@ -1,6 +1,6 @@
 # emTasks — Spec (as built, v0.1.0)
 
-emTasks is a personal task organizer for macOS based on the **Eisenhower matrix**. The matrix sorts tasks by urgency and importance into four groups: do first, schedule, delegate, and eliminate. It's named after Dwight Eisenhower's remark that the urgent is seldom important, and was popularised by Stephen Covey. The app helps you focus on what matters and let go of what can be delegated or dropped.
+emTasks is a personal task organizer for macOS based on the **Eisenhower matrix**. The matrix groups tasks by urgency and importance into four groups: do first, schedule, delegate, and eliminate. It's named after Dwight Eisenhower's remark that the urgent is seldom important, and was popularised by Stephen Covey. The app helps you focus on what matters and let go of what can be delegated or dropped.
 
 > This spec records what was actually built, including changes from the original spec and features added during development. User-facing help is in [README.md](README.md); release history is in [CHANGELOG.md](CHANGELOG.md). Last updated 2026-10-14 (v0.1.0).
 >
