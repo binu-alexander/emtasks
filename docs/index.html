@@ -30,6 +30,7 @@
     background: var(--accent); color: var(--accent-text); text-decoration: none; font-weight: 600; font-size: 16px;
   }
   .small { font-size: 14px; margin-top: 12px; }
+  .small + .small { margin-top: 4px; }
   .small a { color: var(--muted); }
   img.shot { display: block; width: 100%; height: auto; margin: 48px auto 0; }
   p.about { margin-top: 40px; max-width: 600px; line-height: 1.65; }
@@ -43,7 +44,8 @@
   <h1>emTasks</h1>
   <p>A quiet to-do app for Mac, based on the Eisenhower matrix.</p>
   <a class="btn" href="https://github.com/binu-alexander/emtasks/releases/latest">Download for Mac</a>
-  <p class="small">Free · Offline · No account · macOS 11+ on Apple Silicon · <a href="https://github.com/binu-alexander/emtasks#install">Install help</a></p>
+  <p class="small">Free · Offline · No account · macOS 11+ on Apple Silicon</p>
+  <p class="small">Opening it for the first time? macOS asks you to approve it once. <a href="https://github.com/binu-alexander/emtasks#install">Here's how.</a></p>
   <picture>
     <source srcset="screenshots/matrix-dark.png" media="(prefers-color-scheme: dark)">
     <img class="shot" src="screenshots/matrix-light.png" width="1600" height="1122" alt="emTasks with tasks sorted into the four quadrants of the Eisenhower matrix">
