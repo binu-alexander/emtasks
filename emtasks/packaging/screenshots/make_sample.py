@@ -1,5 +1,6 @@
 # Writes a emTasks data file with made-up sample tasks (dates relative to today) for screenshots.
 # Usage: python3 make_sample.py <Theme> <output .ron> [Matrix|List]
+# Dates are fixed days relative to today (and a 48 h urgent window), so shots look the same at any time of day.
 import sys, time, datetime as dt
 theme, out = sys.argv[1], sys.argv[2]
 view = sys.argv[3] if len(sys.argv) > 3 else "Matrix"
@@ -21,9 +22,9 @@ t("Reply to Sam about the venue", "Unsorted", tags=["email"])
 t("Look into standing desks", "Unsorted", tags=["home"])
 t("Renew passport", "Unsorted")
 t("Submit Q3 tax return", "Do", due=today - D + 17*H, tags=["finance"], notes="Receipts are in the Taxes folder.")
-t("Finish client proposal", "Do", due=today + 16*H, tags=["work"])
+t("Finish client proposal", "Do", due=today + D + 11*H, tags=["work"])
 t("Pick up prescription", "Do", due=today, all_day=True, tags=["health"])
-t("Prepare slides for Monday review", "Schedule", due=today + 20*H, tags=["work"])
+t("Prepare slides for Monday review", "Schedule", due=today + D + 15*H, tags=["work"])
 t("Weekly planning", "Schedule", due=today + 4*D + 9*H, tags=["routine"], repeat="Week")
 t("Book annual health check-up", "Schedule", due=today + 12*D, all_day=True, tags=["health"])
 t("Read 'Deep Work', chapter 3", "Schedule", tags=["learning"])
@@ -35,5 +36,5 @@ t("Reorganise bookmarks", "Eliminate")
 t("Draft blog post ideas", "Schedule", tags=["writing"], done_ago=2*D)
 data = f"""(version:1,tasks:[{",".join(tasks)}],next_id:{len(tasks)+1},
 filter:(tags:[],status:Active,sort:Manual),presets:[],view:{view},theme:{theme},
-settings:(auto_urgent:true,urgent_hours:24,show_inbox:true,documents_backup:false,keep_completed:Week))"""
+settings:(auto_urgent:true,urgent_hours:48,show_inbox:true,documents_backup:false,keep_completed:Week))"""
 open(out, "w").write(data)
