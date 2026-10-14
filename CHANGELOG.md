@@ -4,12 +4,6 @@ All notable changes to emTasks. Versions follow [semantic versioning](https://se
 
 ## 0.1.1 — 2026-10-14
 
-### Fixed
-
-- **The Show menu is back to three clear choices:** All tasks, Uncompleted and Completed. It also held the "keep completed tasks for 3 days / 1 week" option, so two items looked selected at once and the menu had to scroll. That option is now only in **Settings**.
-
-## 0.1.0 — 2026-10-14
-
 First public release.
 
 ### Organize
@@ -18,8 +12,8 @@ First public release.
 - **Add tasks** from the top box or straight into a quadrant with ➕. Paste several lines to create several tasks, and add `#tags` inline.
 - **Drag** a task from anywhere on it into another box; a plain click only selects it. Maximize a box with ⛶, and hide the Inbox with ⌘I.
 - **Task details:** due date and time or all-day, repeat every N days/weeks/months/years, notes, a linked task, and tags. Click any tag you've already used to add or remove it.
-- **Sort and filter** by manual order, title or due date; by status; and by tags. Save combinations as presets. A warning bar appears when a filter hides tasks.
-- **Completed tasks** can hide right away, or stay in view for 3 days or 1 week.
+- **Sort and filter** by manual order, title or due date; show all tasks, uncompleted or completed; filter by tags. Save combinations as presets. A warning bar appears when a filter hides tasks.
+- **Completed tasks** can hide right away, or stay in view for 3 days or 1 week (a setting).
 - **Two counters:** all-time progress at the top right ("All time: X of Y done"), and what's on screen now in the status bar ("Showing N open · M done").
 
 ### Quiet by design

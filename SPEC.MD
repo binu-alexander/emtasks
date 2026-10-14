@@ -157,7 +157,7 @@ These are the precise behaviours, as implemented and tested.
 | 2026-10-14 | Top counter is all-time progress; bottom counter is what's on screen | The owner's model: the top is the overall history, and the bottom counts what's in the visible quadrants, open and recently closed. Labels say which is which ("All time:", "Showing"). |
 | 2026-10-14 | About window replaced by `emTasks <version> by B. Alexander` in the bottom-right corner | Simpler: the version is always visible, and a menu item and window fewer. |
 | 2026-10-14 | Pick existing tags with one click in the editor | Retyping tags was slow and caused near-duplicates. |
-| 2026-10-14 | Show menu holds only the three status choices (0.1.1) | Putting the completed-tasks option in the same menu showed two highlighted items at once, which made the filters look broken. That option now lives only in Settings. |
+| 2026-10-14 | Show menu holds only the three status choices | Putting the completed-tasks option in the same menu showed two highlighted items at once, which made the filters look broken. That option lives only in Settings. |
 | 2026-10-14 | MIT license | A permissive, widely understood license for a small open-source app. |
 
 ## Not in scope yet
