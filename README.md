@@ -18,7 +18,7 @@ New tasks wait in the **Inbox** until you drag them into a box.
 - **Private.** It works offline, with no account and no network access. Your tasks live in a folder on your Mac.
 - **Hard to lose data.** It autosaves, backs up every day, lets you undo your last 100 changes, and opens a recovery screen if anything goes wrong.
 
-**Version 0.1.0** · [What's new](CHANGELOG.md) · macOS 11 or later on Apple Silicon · [MIT licensed](LICENSE)
+**Version 0.1.0** · [Website](https://binu-alexander.github.io/emtasks/) · [What's new](CHANGELOG.md) · macOS 11 or later on Apple Silicon · [MIT licensed](LICENSE)
 
 ---
 

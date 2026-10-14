@@ -54,7 +54,7 @@ Every change should keep `cargo test` and `cargo clippy --all-targets -- -D warn
 .
 ├── README.md, SPEC.MD, CHANGELOG.md, CONTRIBUTING.md, LICENSE
 ├── activate                    venv-style script for the project's Rust
-├── docs/screenshots/           README images (regenerate with shoot.sh, below)
+├── docs/                      one-page website (GitHub Pages) and screenshots
 ├── .github/workflows/ci.yml    lint, tests and dependency audit
 └── emtasks/
     ├── .cargo/audit.toml       reviewed dependency advisories, with reasons
