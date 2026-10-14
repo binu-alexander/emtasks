@@ -112,6 +112,7 @@ These are the precise behaviours, as implemented and tested.
 | **Linked task** | When the linked task is completed, the waiting task moves to its urgent box and is marked ⚡. |
 | **Completed tasks** | They always sink to the bottom of their box. In *Uncompleted*, they hide right away, or stay for 3 or 7 days (72 h or 168 h) after completion, depending on the setting. *All tasks* and *Completed* show every completed task. The setting isn't a filter, so it never triggers the warning bar. |
 | **Counters** | **Top, all time:** "All time: X of Y done". Y is every task in the four quadrants, completed or not, whatever the filter; X is the completed ones. The Inbox isn't counted. **Bottom, on screen:** "Showing N open · M done". These are the tasks in the sections currently displayed: the maximized one, or every shown section (including the Inbox when it's visible), after the tag/status filter and the completed-tasks setting. Overdue tasks get a separate red count. |
+| **Show menu** | Exactly three choices: *All tasks* (every task, completed or not), *Uncompleted* (open tasks, plus recently completed ones if the completed-tasks setting keeps them) and *Completed* (every completed task). Nothing else is in this menu; how long completed tasks stay in *Uncompleted* is set only in Settings. |
 | **Filter warning** | Shown when tags or a status other than *Uncompleted* hide tasks that the default view would show. |
 | **Autosave** | About 0.8 s after the last change, and on quit. Written to a temporary file, flushed, renamed over the data file, then the folder is flushed. |
 | **Full backups** | A copy of the data file at every launch and on *Back up now*. The newest 20 are kept. |
@@ -156,6 +157,7 @@ These are the precise behaviours, as implemented and tested.
 | 2026-10-14 | Top counter is all-time progress; bottom counter is what's on screen | The owner's model: the top is the overall history, and the bottom counts what's in the visible quadrants, open and recently closed. Labels say which is which ("All time:", "Showing"). |
 | 2026-10-14 | About window replaced by `emTasks <version> by B. Alexander` in the bottom-right corner | Simpler: the version is always visible, and a menu item and window fewer. |
 | 2026-10-14 | Pick existing tags with one click in the editor | Retyping tags was slow and caused near-duplicates. |
+| 2026-10-14 | Show menu holds only the three status choices (0.1.1) | Putting the completed-tasks option in the same menu showed two highlighted items at once, which made the filters look broken. That option now lives only in Settings. |
 | 2026-10-14 | MIT license | A permissive, widely understood license for a small open-source app. |
 
 ## Not in scope yet

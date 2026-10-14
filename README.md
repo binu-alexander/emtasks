@@ -91,7 +91,7 @@ Click a task to open the details panel on the right, where you can set:
 ### Sort, filter and find
 
 - **Sort** by Manual order, Title or Due date. Completed tasks always sink to the bottom.
-- **Show** *Uncompleted* (the usual view), *All tasks* or *Completed*.
+- **Show** *Uncompleted* (the usual view), *All tasks* (including every completed one) or *Completed*.
 - **Completed tasks in the Uncompleted view** can **hide right away** (the default), **show for 3 days** or **show for 1 week**. Choose this in **Settings** (⌘,).
 - **🏷 Tags** shows tasks that have any of the tags you pick. **⭐ Presets** saves a sort and filter combination so you can return to it in one click.
 - **Missing tasks?** If a filter is hiding any, a yellow bar says how many, with a **Show all tasks** button.

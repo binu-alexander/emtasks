@@ -43,7 +43,7 @@ In VS Code, **⌘⇧B** runs emTasks, and new terminals use the project's Rust a
 The suite covers:
 
 - **Logic and storage:** the task logic, saving and recovery, the one-copy lock, backups, undo, and CSV export/import.
-- **The real interface:** headless tests that simulate mouse and keyboard input. They drag between sections, click ➕ and the Inbox buttons, type, paste, drop a CSV file, and check the filter warning bar.
+- **The real interface:** headless tests that simulate mouse and keyboard input. They drag between sections, click ➕ and the Inbox buttons, type, paste, drop a CSV file, and check the filter warning bar. Controls such as the Show, Sort and Tags menus, Reset and Settings options are found by name through egui's accessibility tree, clicked, and the tasks on screen are checked.
 - **Visual checks:** every symbol renders (no empty boxes), every theme meets contrast standards, and nothing spills off or overlaps at the smallest window size.
 
 Every change should keep `cargo test` and `cargo clippy --all-targets -- -D warnings` clean. CI runs both, plus `cargo audit`, on every push and pull request.
