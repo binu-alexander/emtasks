@@ -18,13 +18,13 @@ New tasks wait in the **Inbox** until you drag them into a box.
 - **Private.** It works offline, with no account and no network access. Your tasks live in a folder on your Mac.
 - **Hard to lose data.** It autosaves, backs up every day, lets you undo your last 100 changes, and opens a recovery screen if anything goes wrong.
 
-**Version 0.1.0** · [Website](https://binu-alexander.github.io/emtasks/) · [What's new](CHANGELOG.md) · macOS 11 or later on Apple Silicon · [MIT licensed](LICENSE)
+**Version 0.1.1** · [Website](https://binu-alexander.github.io/emtasks/) · [What's new](CHANGELOG.md) · macOS 11 or later on Apple Silicon · [MIT licensed](LICENSE)
 
 ---
 
 ## Install
 
-1. Download `emTasks-0.1.0.zip` from the [latest release](https://github.com/binu-alexander/emtasks/releases/latest), unzip it, and open `emTasks-0.1.0.dmg`.
+1. Download `emTasks-0.1.1.zip` from the [latest release](https://github.com/binu-alexander/emtasks/releases/latest), unzip it, and open `emTasks-0.1.1.dmg`.
 2. Drag **emTasks** onto **Applications**.
 3. Open emTasks from Applications.
 
@@ -40,7 +40,7 @@ New tasks wait in the **Inbox** until you drag them into a box.
 Each release comes with a fingerprint file, `emTasks-<version>.zip.sha256`. In Terminal, run:
 
 ```sh
-shasum -a 256 emTasks-0.1.0.zip
+shasum -a 256 emTasks-0.1.1.zip
 ```
 
 The code it prints must exactly match the one in the `.sha256` file. Ideally, get the fingerprint through a different channel than the zip.
@@ -92,7 +92,7 @@ Click a task to open the details panel on the right, where you can set:
 
 - **Sort** by Manual order, Title or Due date. Completed tasks always sink to the bottom.
 - **Show** *Uncompleted* (the usual view), *All tasks* or *Completed*.
-- **Completed tasks in the Uncompleted view** can **hide right away** (the default), **show for 3 days** or **show for 1 week**. Choose this at the bottom of the **Show** menu or in Settings.
+- **Completed tasks in the Uncompleted view** can **hide right away** (the default), **show for 3 days** or **show for 1 week**. Choose this in **Settings** (⌘,).
 - **🏷 Tags** shows tasks that have any of the tags you pick. **⭐ Presets** saves a sort and filter combination so you can return to it in one click.
 - **Missing tasks?** If a filter is hiding any, a yellow bar says how many, with a **Show all tasks** button.
 

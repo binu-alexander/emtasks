@@ -171,11 +171,6 @@ impl App {
                         for s in StatusFilter::ALL {
                             ui.selectable_value(&mut self.filter.status, s, s.label());
                         }
-                        ui.separator();
-                        ui.weak("Completed tasks in Uncompleted:");
-                        for k in KeepCompleted::ALL {
-                            ui.selectable_value(&mut self.settings.keep_completed, k, k.label());
-                        }
                     });
 
                 let tags_label = if self.filter.tags.is_empty() {

@@ -2,6 +2,12 @@
 
 All notable changes to emTasks. Versions follow [semantic versioning](https://semver.org).
 
+## 0.1.1 — 2026-10-14
+
+### Fixed
+
+- **The Show menu is back to three clear choices:** All tasks, Uncompleted and Completed. It also held the "keep completed tasks for 3 days / 1 week" option, so two items looked selected at once and the menu had to scroll. That option is now only in **Settings**.
+
 ## 0.1.0 — 2026-10-14
 
 First public release.

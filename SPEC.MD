@@ -1,8 +1,8 @@
-# emTasks — Spec (as built, v0.1.0)
+# emTasks — Spec (as built, v0.1.1)
 
 emTasks is a personal task organizer for macOS based on the **Eisenhower matrix**. The matrix groups tasks by urgency and importance into four groups: do first, schedule, delegate, and eliminate. It's named after Dwight Eisenhower's remark that the urgent is seldom important, and was popularised by Stephen Covey. The app helps you focus on what matters and let go of what can be delegated or dropped.
 
-> This spec records what was actually built, including changes from the original spec and features added during development. User-facing help is in [README.md](README.md); release history is in [CHANGELOG.md](CHANGELOG.md). Last updated 2026-10-14 (v0.1.0).
+> This spec records what was actually built, including changes from the original spec and features added during development. User-facing help is in [README.md](README.md); release history is in [CHANGELOG.md](CHANGELOG.md). Last updated 2026-10-14 (v0.1.1).
 >
 > **Legend:** ✅ built as specified · ✏️ built differently · ❌ dropped by decision · ➕ added beyond the original spec
 
@@ -61,7 +61,7 @@ Settled during the build:
 - ✅ Sort tasks by title, due date, or manually. Completed tasks always sink to the bottom.
 - ✅ Use tags to organize tasks effectively. In the editor, every tag already in use is offered as a chip; click to add or remove it.
 - ✅ Filter tasks by tags (any of the selected tags) and by status (all / uncompleted / completed).
-- ➕ **Completed tasks linger:** in the Uncompleted view, a completed task can hide right away (default), show for 3 days, or show for 1 week after it was completed, counted from its completion time. This is a saved setting, not a filter, so it never triggers the filter warning bar. Set it in the Show menu or Settings.
+- ➕ **Completed tasks linger:** in the Uncompleted view, a completed task can hide right away (default), show for 3 days, or show for 1 week after it was completed, counted from its completion time. This is a saved setting, not a filter, so it never triggers the filter warning bar. Set it in Settings.
 - ✅ Save and quickly apply custom filter presets for easy navigation (⭐ Presets).
 
 ## Appearance ➕
@@ -124,7 +124,7 @@ These are the precise behaviours, as implemented and tested.
 ## Platform and distribution ➕
 
 - **Platform:** macOS 11+ on Apple Silicon. Built in Rust with egui/eframe.
-- **Packaging:** `emTasks.app` with its own icon, plus `emTasks-0.1.0.dmg`, both built offline by `emtasks/packaging/package.sh`. The release zip `emTasks-0.1.0.zip` contains the dmg, INSTALL.txt, README.md, SPEC.MD, CHANGELOG.md and LICENSE.
+- **Packaging:** `emTasks.app` with its own icon, plus `emTasks-0.1.1.dmg`, both built offline by `emtasks/packaging/package.sh`. The release zip `emTasks-0.1.1.zip` contains the dmg, INSTALL.txt, README.md, SPEC.MD, CHANGELOG.md and LICENSE.
 - **Release gate:** `package.sh` runs the full test suite and refuses to build if any test fails. It builds with the exact library versions in `Cargo.lock`.
 - **Signing:** ad-hoc signed with the hardened runtime, and not notarized. `package.sh` can sign with a Developer ID and notarize once an Apple Developer account is available (`SIGN_IDENTITY`, `NOTARY_PROFILE`). On another Mac, the first launch needs approval under System Settings → Privacy & Security → Open Anyway.
 - **Keyboard:** the full shortcut list is under Help → Keyboard shortcuts.

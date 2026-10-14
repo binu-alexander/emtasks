@@ -1218,6 +1218,129 @@ mod tests {
         assert!(a.task(id).unwrap().tags.is_empty(), "a second click removes it");
     }
 
+    /// Every named widget on screen this frame: (name, rect). Uses egui's accessibility tree.
+    fn widgets(sim: &mut Sim, app: &mut App, events: Vec<egui::Event>) -> Vec<(String, egui::Rect)> {
+        sim.ctx.enable_accesskit();
+        sim.time += 1.0 / 60.0;
+        let input = egui::RawInput {
+            screen_rect: Some(egui::Rect::from_min_size(egui::Pos2::ZERO, sim.size)),
+            time: Some(sim.time),
+            events,
+            ..Default::default()
+        };
+        let out = sim.ctx.run(input, |ctx| app.frame(ctx));
+        out.platform_output
+            .accesskit_update
+            .map(|u| {
+                u.nodes
+                    .iter()
+                    .filter_map(|(_, n)| {
+                        let b = n.bounds()?;
+                        let r = egui::Rect::from_min_max(egui::pos2(b.x0 as f32, b.y0 as f32), egui::pos2(b.x1 as f32, b.y1 as f32));
+                        Some((n.name()?.to_string(), r))
+                    })
+                    .collect()
+            })
+            .unwrap_or_default()
+    }
+
+    #[test]
+    fn show_menu_has_three_choices_and_each_one_works_by_clicking() {
+        let (mut a, mut sim, _, _) = sim_app();
+        let open = a.add_task("Open thing", Section::Do);
+        let done = a.add_task("Finished thing", Section::Do);
+        a.set_completed_at(done, true, now() - 60);
+        let shown = |a: &App| a.visible_tasks(Section::Do).iter().map(|t| t.id).collect::<Vec<_>>();
+        for (choice, status, expect) in [
+            ("All tasks", StatusFilter::All, vec![open, done]),
+            ("Completed", StatusFilter::Completed, vec![done]),
+            ("Uncompleted", StatusFilter::Active, vec![open]),
+        ] {
+            let w = widgets(&mut sim, &mut a, vec![]);
+            let label = w.iter().find(|(n, _)| n == "Show").unwrap().1;
+            sim.click(&mut a, egui::pos2(label.right() + 50.0, label.center().y));
+            let w = widgets(&mut sim, &mut a, vec![]);
+            // The menu holds only the three status choices: nothing else is highlighted alongside them.
+            for other in ["Hide right away", "Show for 3 days", "Show for 1 week"] {
+                assert!(!w.iter().any(|(n, _)| n == other), "{other:?} must not be in the Show menu");
+            }
+            let item = w.iter().find(|(n, r)| n == choice && r.top() > label.bottom()).expect(choice).1;
+            sim.click(&mut a, item.center());
+            assert_eq!(a.filter.status, status, "clicking {choice:?}");
+            assert_eq!(shown(&a), expect, "tasks shown for {choice:?}");
+        }
+    }
+
+    #[test]
+    fn when_completed_tasks_hide_is_a_setting_chosen_by_clicking() {
+        let (mut a, mut sim, _, _) = sim_app();
+        let open = a.add_task("Open thing", Section::Do);
+        let yesterday = a.add_task("Done yesterday", Section::Do);
+        let last_month = a.add_task("Done last month", Section::Do);
+        a.set_completed_at(yesterday, true, now() - 86_400);
+        a.set_completed_at(last_month, true, now() - 30 * 86_400);
+        let shown = |a: &App| a.visible_tasks(Section::Do).iter().map(|t| t.id).collect::<Vec<_>>();
+        assert_eq!(shown(&a), [open], "default: completed tasks hide right away");
+
+        a.ui.show_settings = true;
+        // A new window measures itself on its first frames; let it settle before clicking.
+        for _ in 0..3 {
+            sim.frame(&mut a, vec![]);
+        }
+        let w = widgets(&mut sim, &mut a, vec![]);
+        let three_days = w.iter().find(|(n, _)| n == "Show for 3 days").expect("option is in Settings").1;
+        sim.click(&mut a, three_days.center());
+        assert_eq!(a.settings.keep_completed, KeepCompleted::ThreeDays);
+        assert_eq!(shown(&a), [open, yesterday], "recently completed stays visible; older ones hide");
+
+        a.filter.status = StatusFilter::All;
+        assert_eq!(shown(&a), [open, yesterday, last_month], "All tasks always shows every completed task");
+        a.filter.status = StatusFilter::Completed;
+        assert_eq!(shown(&a), [yesterday, last_month], "Completed shows every completed task");
+    }
+
+    #[test]
+    fn sort_tags_and_reset_work_by_clicking() {
+        let (mut a, mut sim, _, _) = sim_app();
+        let b = a.add_task("Banana #food", Section::Do);
+        let c = a.add_task("apple #food", Section::Do);
+        let d = a.add_task("Car #auto", Section::Do);
+        let shown = |a: &App| a.visible_tasks(Section::Do).iter().map(|t| t.id).collect::<Vec<_>>();
+        let find = |w: &[(String, egui::Rect)], name: &str| w.iter().find(|(n, _)| n == name).map(|x| x.1);
+
+        // Sort → Title
+        let w = widgets(&mut sim, &mut a, vec![]);
+        let sort = find(&w, "Sort").unwrap();
+        sim.click(&mut a, egui::pos2(sort.right() + 50.0, sort.center().y));
+        let w = widgets(&mut sim, &mut a, vec![]);
+        let title = w.iter().find(|(n, r)| n == "Title" && r.top() > sort.bottom()).expect("Title in Sort menu").1;
+        sim.click(&mut a, title.center());
+        assert_eq!(a.filter.sort, SortMode::Title);
+        assert_eq!(shown(&a), [c, b, d], "sorted by title");
+
+        // Tags → #food
+        let w = widgets(&mut sim, &mut a, vec![]);
+        sim.click(&mut a, find(&w, "🏷 All tags").expect("tags button").center());
+        let w = widgets(&mut sim, &mut a, vec![]);
+        let tags_btn = find(&w, "🏷 All tags").expect("tags button");
+        let food = w
+            .iter()
+            .filter(|(n, r)| n == "#food" && r.top() >= tags_btn.bottom())
+            .min_by(|x, y| x.1.top().total_cmp(&y.1.top())) // the menu item sits right under the button; task tags are lower down
+            .expect("#food in tags menu")
+            .1;
+        sim.click(&mut a, food.center());
+        assert!(a.filter.tags.contains("food"));
+        assert_eq!(shown(&a), [c, b], "only #food tasks");
+        sim.key(&mut a, egui::Key::Escape, egui::Modifiers::NONE);
+
+        // ✖ Reset brings everything back
+        let w = widgets(&mut sim, &mut a, vec![]);
+        sim.click(&mut a, find(&w, "✖ Reset").expect("Reset shows while filtered").center());
+        assert_eq!(a.filter, Filter::default());
+        assert_eq!(shown(&a), [b, c, d]);
+    }
+
     #[test]
     fn drag_by_title_moves_task_between_boxes() {
         let (mut a, mut sim, id, _) = sim_app();
