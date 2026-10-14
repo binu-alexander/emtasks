@@ -19,10 +19,10 @@ printf 'import CoreGraphics\nCGWarpMouseCursorPosition(CGPoint(x: 2, y: 400))\n'
 swiftc -O "$WORK/park.swift" -o "$WORK/park"
 mkdir -p "$OUT"
 
-shoot() { # theme name view
+shoot() { # theme name view [demo-step]
   local home="$WORK/home-$2"
   mkdir -p "$home/Library/Application Support/emTasks"
-  python3 -I "$HERE/make_sample.py" "$1" "$home/Library/Application Support/emTasks/emtasks-data.ron" "$3"
+  python3 -I "$HERE/make_sample.py" "$1" "$home/Library/Application Support/emTasks/emtasks-data.ron" "$3" ${4:-}
   HOME="$home" "$BIN" >/dev/null 2>&1 &
   PID=$!
   "$WORK/park"
@@ -31,14 +31,26 @@ shoot() { # theme name view
   local ok=""
   for _ in 1 2 3 4 5 6 7 8 9 10; do
     local win; win="$("$WORK/winid" "$PID" || true)"
-    if [ -n "$win" ] && screencapture -x -l "$win" "$WORK/$2.png" 2>/dev/null && [ -s "$WORK/$2.png" ]; then ok=1; break; fi
+    if [ -n "$win" ] && screencapture -x ${4:+-o} -l "$win" "$WORK/$2.png" 2>/dev/null && [ -s "$WORK/$2.png" ]; then ok=1; break; fi
     sleep 1
   done
   kill "$PID"; wait "$PID" 2>/dev/null || true; PID=""
   [ -n "$ok" ] || { echo "Couldn't capture $2 (is Screen Recording allowed for this app?)" >&2; exit 1; }
-  sips -Z 1600 "$WORK/$2.png" --out "$OUT/$2.png" >/dev/null
-  echo "  $OUT/$2.png"
+  if [ -n "${4:-}" ]; then
+    # Website walkthrough frames: smaller JPEGs (the page rounds the corners).
+    mkdir -p "$ROOT/docs/demo"
+    sips -Z 1400 -s format jpeg -s formatOptions 82 "$WORK/$2.png" --out "$ROOT/docs/demo/$2.jpg" >/dev/null
+    echo "  $ROOT/docs/demo/$2.jpg"
+  else
+    sips -Z 1600 "$WORK/$2.png" --out "$OUT/$2.png" >/dev/null
+    echo "  $OUT/$2.png"
+  fi
 }
 shoot Daylight matrix-light Matrix
 shoot Midnight matrix-dark Matrix
 shoot Paper list-paper List
+# Website walkthrough: the same task at each step, in a light and a dark theme.
+for n in 1 2 3 4; do
+  shoot Daylight "light-$n" Matrix "$n"
+  shoot Midnight "dark-$n" Matrix "$n"
+done
