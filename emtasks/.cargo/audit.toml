@@ -1,0 +1,11 @@
+# Advisories reviewed on 2026-10-13. Revisit when upgrading eframe, or if a Linux build is ever added.
+[advisories]
+ignore = [
+    # quick-xml 0.30: only reached via accesskit_unix → zbus (Linux accessibility); not compiled on macOS.
+    "RUSTSEC-2026-0194",
+    "RUSTSEC-2026-0195",
+    # paste (unmaintained): Linux-only dependency path; not compiled on macOS.
+    "RUSTSEC-2024-0436",
+    # ttf-parser (unmaintained, no known vulnerability): egui's font parser; goes away with a future egui upgrade.
+    "RUSTSEC-2026-0192",
+]

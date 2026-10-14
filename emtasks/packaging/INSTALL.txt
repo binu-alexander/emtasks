@@ -1,0 +1,41 @@
+emTasks {{VERSION}}
+=============
+
+A quiet to-do organizer for Mac, based on the Eisenhower matrix
+(urgent vs. important). Works fully offline. Your tasks stay on your Mac,
+apart from a daily CSV backup in Documents/emTasks (synced by iCloud if
+your Documents folder is).
+
+Requirements: a Mac with Apple Silicon (M1 or newer), macOS 11 or later.
+
+Check the download (optional, recommended)
+------------------------------------------
+Because emTasks isn't notarized by Apple, check that your copy wasn't
+altered. Ask the sender for the SHA-256 fingerprint (ideally through a
+different channel than the download), then in Terminal run:
+
+    shasum -a 256 emTasks-{{VERSION}}.zip
+
+The long code it prints must match the fingerprint exactly.
+
+To install
+----------
+1. Open emTasks-{{VERSION}}.dmg and drag emTasks into Applications.
+
+2. Open emTasks. Because it isn't from the App Store, your Mac will say
+   "Apple could not verify emTasks". Click Done.
+
+3. Go to System Settings > Privacy & Security, scroll down, and click
+   "Open Anyway" next to emTasks. You only need to do this once.
+
+To update later
+---------------
+Quit emTasks, then drag the new version into Applications and choose
+Replace. Your tasks are kept. They're stored separately from the app.
+
+Back up your tasks anytime with File > Export tasks to CSV.
+
+README.md: features, keyboard shortcuts and where your data lives.
+SPEC.MD:   the product spec, as built.
+CHANGELOG.md: what changed in each version.
+LICENSE:   MIT.

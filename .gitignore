@@ -1,0 +1,12 @@
+# Project-local Rust toolchain and build output
+.rust/
+target/
+
+# Built app and release files (rebuild with emtasks/packaging/package.sh)
+*.app/
+*.dmg
+*.zip
+*.sha256
+
+# macOS
+.DS_Store

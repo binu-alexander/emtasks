@@ -1,0 +1,19 @@
+# Usage: source ./activate   (like a Python venv)
+# Keeps the Rust toolchain AND all downloaded crates inside this project.
+_RUST_ENV_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]:-${(%):-%x}}")" && pwd)"
+
+export _OLD_RUST_PATH="$PATH"
+export _OLD_RUST_PS1="${PS1:-}"
+export RUSTUP_HOME="$_RUST_ENV_ROOT/.rust/rustup"
+export CARGO_HOME="$_RUST_ENV_ROOT/.rust/cargo"
+export PATH="$CARGO_HOME/bin:$PATH"
+export PS1="(rust) ${PS1:-}"
+
+deactivate() {
+  export PATH="$_OLD_RUST_PATH"
+  export PS1="$_OLD_RUST_PS1"
+  unset RUSTUP_HOME CARGO_HOME _OLD_RUST_PATH _OLD_RUST_PS1 _RUST_ENV_ROOT
+  unset -f deactivate
+  hash -r 2>/dev/null
+}
+hash -r 2>/dev/null

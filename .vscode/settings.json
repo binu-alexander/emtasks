@@ -1,0 +1,17 @@
+{
+  "terminal.integrated.env.osx": {
+    "RUSTUP_HOME": "${workspaceFolder}/.rust/rustup",
+    "CARGO_HOME": "${workspaceFolder}/.rust/cargo",
+    "PATH": "${workspaceFolder}/.rust/cargo/bin:${env:PATH}"
+  },
+  "rust-analyzer.server.extraEnv": {
+    "RUSTUP_HOME": "${workspaceFolder}/.rust/rustup",
+    "CARGO_HOME": "${workspaceFolder}/.rust/cargo",
+    "PATH": "${workspaceFolder}/.rust/cargo/bin:${env:PATH}"
+  },
+  "rust-analyzer.cargo.extraEnv": {
+    "RUSTUP_HOME": "${workspaceFolder}/.rust/rustup",
+    "CARGO_HOME": "${workspaceFolder}/.rust/cargo"
+  },
+  "rust-analyzer.linkedProjects": ["emtasks/Cargo.toml"]
+}
